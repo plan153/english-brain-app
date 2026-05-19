@@ -1,7 +1,5 @@
 // 학습 화면 — 듣기 → 이미지 연상 → 말하기 → 피드백
 import 'dart:async';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../models/models.dart';
@@ -63,14 +61,7 @@ class _StudyScreenState extends State<StudyScreen> {
   }
 
   Future<void> _playModel() async {
-    if (kIsWeb) {
-      final text = _cur.en.replaceAll("'", " ");
-      js.context.callMethod('eval', [
-        "window.speechSynthesis.cancel();"
-        "var u=new SpeechSynthesisUtterance('$text');"
-        "u.lang='en-US';u.rate=0.85;window.speechSynthesis.speak(u);"
-      ]);
-    } else if (_cur.audioUrl != null) {
+    if (_cur.audioUrl != null) {
       try { await _player.play(UrlSource(_cur.audioUrl!)); }
       catch (e) { debugPrint('오류: $e'); }
     }
