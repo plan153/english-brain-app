@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  # ── 1. Flutter 코드 검사 ──────────────────────────────
+  # ── 1. Flutter 코드 검사 (Analyze) ──────────────────────────────
   flutter-check:
     name: Flutter Analyze
     runs-on: ubuntu-latest
