@@ -19,8 +19,19 @@ jobs:
         run: flutter pub get
         working-directory: app
       - name: Analyze
-        run: flutter analyze
+        run: flutter analyze --verbose 2>&1 || (cat /tmp/analyze.log 2>/dev/null || true)
         working-directory: app
+        continue-on-error: true
+
+      - name: Check Analyze Results
+        run: |
+          cd app
+          flutter analyze > /tmp/analyze_results.txt 2>&1
+          if [ $? -ne 0 ]; then
+            echo "Analysis failed with:"
+            cat /tmp/analyze_results.txt
+            exit 1
+          fi
 
   # ── 2. Supabase DB 마이그레이션 ───────────────────────
   db-migrate:
