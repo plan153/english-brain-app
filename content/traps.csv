@@ -1,0 +1,17 @@
+﻿동사,틀린문장,맞는문장,이유
+HAVE,I have car.,I have a car.,차 한 대 → a 필수 (셀 수 있는 명사)
+HAVE,I am have a question.,I have a question.,"have가 동사, am 빼기"
+HAVE,She have two sisters.,She has two sisters.,3인칭 단수 → has
+HAVE,I have a homework.,I have homework.,homework는 셀 수 없음 → a 없이
+GET,I get new shoes yesterday.,I got new shoes yesterday.,yesterday → 과거 got
+GET,It get dark.,It's getting dark.,변하는 중 → 진행형 (is getting)
+GET,I get to home.,I get home.,home 앞엔 to 없음 (부사)
+GET,He get angry.,He got angry.,이미 화남 → 과거 got
+TAKE,How long it takes?,How long does it take?,의문문 → does + 동사원형
+TAKE,I take a picture yesterday.,I took a picture yesterday.,과거 → took
+TAKE,Take a your time.,Take your time.,your 앞에 a 없음
+TAKE,It take 10 minutes.,It takes 10 minutes.,3인칭 단수 it → takes
+MAKE,You make me to laugh.,You make me laugh.,make + 목적어 + 동사원형 (to 없음)
+MAKE,I make a mistake yesterday.,I made a mistake yesterday.,과거 → made
+MAKE,That make me happy.,That makes me happy.,That(3인칭) → makes
+MAKE,Let's make a dinner.,Let's make dinner.,식사 dinner는 보통 a 없이

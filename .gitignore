@@ -1,0 +1,20 @@
+node_modules/
+.env
+.DS_Store
+*.log
+
+# Flutter build
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/.pub-cache/
+app/*.iml
+
+# IDE
+.idea/
+.vscode/
+
+# Supabase CLI temp
+supabase/.temp/

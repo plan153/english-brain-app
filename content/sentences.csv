@@ -1,0 +1,181 @@
+﻿동사,타입,난이도,빈도,시제,한국어,영어,어순힌트,활성
+HAVE,소유 — 가지고 있다,1,중,현재,나 차 있어.,I have a car.,,Y
+HAVE,소유 — 가지고 있다,1,중,현재,그녀는 여동생이 둘 있어.,She has two sisters.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,우리 집에 강아지 키워.,We have a dog at home.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,나 지금 시간 좀 있어.,I have some time now.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,그는 좋은 직장이 있어.,He has a good job.,,Y
+HAVE,소유 — 가지고 있다,1,중,현재,나 질문 있어요.,I have a question.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,우리 내일 회의 있어.,We have a meeting tomorrow.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,너 내 번호 있어?,Do you have my number?,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,나 좋은 생각이 있어.,I have a good idea.,,Y
+HAVE,소유 — 가지고 있다,2,중,현재,그들은 큰 집이 있어.,They have a big house.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,어제 즐거운 시간 보냈어.,I had a great time yesterday.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,힘든 한 주였어.,I had a tough week.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,우리 좋은 얘기 나눴어.,We had a nice talk.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,그녀는 어제 안 좋은 하루였어.,She had a bad day.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,1,중,과거,"have had는 축약(I've), that→it",I've had it before.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,재밌었어!,I had so much fun!,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,3,중,과거,어젯밤 이상한 꿈 꿨어.,I had a weird dream last night.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,과거,우리 어제 문제가 좀 있었어.,We had a problem yesterday.,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,2,중,현재,좋은 주말 보냈어?,Did you have a good weekend?,,Y
+HAVE,경험·상태 — 겪다 / ~인 상태다,3,중,과거,그는 어릴 때 힘들었어.,He had a hard time as a kid.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,3,중,현재,나 보통 아침에 커피 마셔.,I usually have coffee in the morning.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,2,중,현재,점심 뭐 먹었어?,What did you have for lunch?,,Y
+HAVE,먹다·마시다 — 입으로 들이다,3,중,미래,저 물 한 잔 주세요.,"I'll have a glass of water, please.",,Y
+HAVE,먹다·마시다 — 입으로 들이다,2,중,현재,우리 저녁에 치킨 먹자.,Let's have chicken for dinner.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,2,중,과거,나 아직 아침 안 먹었어.,I haven't had breakfast yet.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,3,중,현재,케이크 한 조각 먹을래?,Do you want to have a piece of cake?,,Y
+HAVE,먹다·마시다 — 입으로 들이다,2,중,미래,그냥 샐러드 먹을게.,I'll just have a salad.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,3,중,현재,우리 같이 점심 먹을래?,Do you want to have lunch together?,,Y
+HAVE,먹다·마시다 — 입으로 들이다,1,중,현재,초보 학습엔 ate가 직관적,I ate lunch late.,,Y
+HAVE,먹다·마시다 — 입으로 들이다,3,중,현재,차 한 잔 하실래요?,Would you like to have some tea?,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,이 폰은 카메라가 좋아.,This phone has a good camera.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,그 방은 창문이 커.,The room has big windows.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,이 셔츠는 주머니가 없어.,This shirt doesn't have pockets.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,그녀는 미소가 예뻐.,She has a nice smile.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,이 차는 좌석이 넓어.,This car has wide seats.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,그 집은 정원이 있어.,The house has a garden.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,3,중,현재,이 책은 그림이 많아.,This book has a lot of pictures.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,그는 목소리가 좋아.,He has a nice voice.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,이 노트북은 화면이 커.,This laptop has a big screen.,,Y
+HAVE,속성·부분 — 그 일부로 지니다,2,중,현재,그 가게는 좋은 물건이 많아.,That store has good stuff.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,나 어제 머리 잘랐어.,I had my hair cut yesterday.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,차 수리 맡겼어.,I had my car fixed.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,미래,내가 그에게 다시 전화하라고 할게.,I'll have him call you back.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,그녀가 사람을 시켜서 그걸 보냈어.,She had someone send it.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,3,중,과거,"회화는 got, my→a",I got a tooth fixed last week.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,미래,내가 그를 시켜서 도와줄게.,I'll have him help you.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,우리 집에 사람 불러서 청소했어.,We had someone clean the house.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,그가 나한테 그거 다시 하라고 시켰어.,He had me do it again.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,과거,나 사진 인화 맡겼어.,I had my photos printed.,,Y
+HAVE,사역 — ~하게 하다 / 시키다,2,중,미래,내가 직원한테 확인하라고 할게요.,I'll have the staff check it.,,Y
+GET,획득·구매 — 손에 넣다,2,중,과거,나 어제 새 신발 샀어.,I got new shoes yesterday.,,Y
+GET,획득·구매 — 손에 넣다,3,중,과거,그녀가 친구한테 선물 받았어.,She got a gift from a friend.,,Y
+GET,획득·구매 — 손에 넣다,2,중,현재,우유 좀 사다 줄래?,Can you get some milk?,,Y
+GET,획득·구매 — 손에 넣다,1,중,과거,나 그 일자리 됐어!,I got the job!,,Y
+GET,획득·구매 — 손에 넣다,2,중,현재,어디서 그 가방 샀어?,Where did you get that bag?,,Y
+GET,획득·구매 — 손에 넣다,1,중,미래,커피 한 잔 사 올게.,I'll get a coffee.,,Y
+GET,획득·구매 — 손에 넣다,3,중,과거,그는 생일에 새 폰 받았어.,He got a new phone for his birthday.,,Y
+GET,획득·구매 — 손에 넣다,1,중,과거,표 두 장 구했어.,I got two tickets.,,Y
+GET,획득·구매 — 손에 넣다,2,중,미래,나중에 빵 좀 사 올게.,I'll get some bread later.,,Y
+GET,획득·구매 — 손에 넣다,2,중,현재,너 그거 어디서 났어?,Where did you get it?,,Y
+GET,이동·도달 — 어딘가에 닿다,3,중,현재,나 보통 8시에 회사 도착해.,I usually get to work at 8.,,Y
+GET,이동·도달 — 어딘가에 닿다,2,중,미래,집에 언제 와?,When will you get home?,,Y
+GET,이동·도달 — 어딘가에 닿다,2,중,현재,거기 어떻게 가?,How do I get there?,,Y
+GET,이동·도달 — 어딘가에 닿다,1,중,과거,나 방금 도착했어.,I just got here.,,Y
+GET,이동·도달 — 어딘가에 닿다,1,중,과거,우리 늦게 도착했어.,We got there late.,,Y
+GET,이동·도달 — 어딘가에 닿다,3,중,현재,공항까지 어떻게 가요?,How do I get to the airport?,,Y
+GET,이동·도달 — 어딘가에 닿다,1,중,과거,그는 일찍 집에 왔어.,He got home early.,,Y
+GET,이동·도달 — 어딘가에 닿다,1,중,미래,우리 곧 도착해.,We'll get there soon.,,Y
+GET,이동·도달 — 어딘가에 닿다,3,중,현재,기차역까지 걸어서 가.,I get to the station on foot.,,Y
+GET,이동·도달 — 어딘가에 닿다,2,중,현재,너 몇 시에 도착했어?,What time did you get there?,,Y
+GET,상태변화 — ~해지다,1,중,현재,점점 어두워지고 있어.,It's getting dark.,,Y
+GET,상태변화 — ~해지다,1,중,현재,나 배고파지고 있어.,I'm getting hungry.,,Y
+GET,상태변화 — ~해지다,1,중,현재,날씨가 추워지고 있어.,It's getting cold.,,Y
+GET,상태변화 — ~해지다,1,중,현재,나 피곤해지기 시작했어.,I'm getting tired.,,Y
+GET,상태변화 — ~해지다,1,중,현재,준비해!,Get ready!,,Y
+GET,상태변화 — ~해지다,1,중,현재,점점 나아지고 있어.,It's getting better.,,Y
+GET,상태변화 — ~해지다,2,중,현재,"늦어지고 있어, 가자.","It's getting late, let's go.",,Y
+GET,상태변화 — ~해지다,1,중,현재,나 긴장돼.,I'm getting nervous.,,Y
+GET,상태변화 — ~해지다,1,중,과거,그는 화가 났어.,He got angry.,,Y
+GET,상태변화 — ~해지다,2,중,현재,너 점점 잘하고 있어.,You're getting good at this.,,Y
+GET,자격·기회 — ~하게 되다,2,중,과거,나 그를 만날 기회가 있었어.,I got to meet him.,,Y
+GET,자격·기회 — ~하게 되다,2,중,과거,그녀는 일찍 갈 수 있게 됐어.,She got to leave early.,,Y
+GET,자격·기회 — ~하게 되다,1,중,과거,우리 무료 표 받았어.,We got free tickets.,,Y
+GET,자격·기회 — ~하게 되다,3,중,과거,나 새 프로젝트 맡게 됐어.,I got to work on a new project.,,Y
+GET,자격·기회 — ~하게 되다,1,중,과거,그는 1등 했어.,He got first place.,,Y
+GET,자격·기회 — ~하게 되다,2,중,과거,나 휴가 받았어.,I got some time off.,,Y
+GET,자격·기회 — ~하게 되다,1,중,과거,우리 그 집 계약했어.,We got the house.,,Y
+GET,자격·기회 — ~하게 되다,2,중,현재,너 그거 해볼 기회 있었어?,Did you get to try it?,,Y
+GET,자격·기회 — ~하게 되다,3,중,현재,나 다음 주에 쉴 수 있게 됐어.,I get to take next week off.,,Y
+GET,자격·기회 — ~하게 되다,1,중,과거,그녀는 상을 받았어.,She got an award.,,Y
+GET,이해·전달 — 머리에 들어오다,1,중,현재,무슨 말인지 알겠어.,I get it.,,Y
+GET,이해·전달 — 머리에 들어오다,1,중,현재,왜 그러는지 이해가 안 돼.,I don't get why.,,Y
+GET,이해·전달 — 머리에 들어오다,1,중,현재,이제 알겠어!,Now I get it!,,Y
+GET,이해·전달 — 머리에 들어오다,2,중,현재,그 농담 이해 못 했어.,I didn't get the joke.,,Y
+GET,이해·전달 — 머리에 들어오다,2,중,현재,내 말 이해돼?,Do you get what I mean?,,Y
+GET,이해·전달 — 머리에 들어오다,1,중,과거,그가 메시지 전달했어.,He got the message.,,Y
+GET,이해·전달 — 머리에 들어오다,2,중,현재,아직 이해가 안 가.,I still don't get it.,,Y
+GET,이해·전달 — 머리에 들어오다,1,중,현재,너 이거 이해돼?,Do you get this?,,Y
+GET,이해·전달 — 머리에 들어오다,2,중,과거,그녀는 바로 알아들었어.,She got it right away.,,Y
+GET,이해·전달 — 머리에 들어오다,2,중,현재,"미안, 이해 못 했어.","Sorry, I didn't get that.",,Y
+TAKE,가져가다·잡다,1,중,현재,우산 가져가.,Take an umbrella.,,Y
+TAKE,가져가다·잡다,1,중,현재,내 손 잡아.,Take my hand.,,Y
+TAKE,가져가다·잡다,1,중,현재,우리 버스 타자.,Let's take the bus.,,Y
+TAKE,가져가다·잡다,1,중,현재,이거 가져가도 돼?,Can I take this?,,Y
+TAKE,가져가다·잡다,1,중,과거,그가 내 펜 가져갔어.,He took my pen.,,Y
+TAKE,가져가다·잡다,1,중,현재,자리 하나 잡아.,Take a seat.,,Y
+TAKE,가져가다·잡다,1,중,현재,이 약 먹어.,Take this medicine.,,Y
+TAKE,가져가다·잡다,2,중,현재,나 우산 안 가져왔어.,I didn't take an umbrella.,,Y
+TAKE,가져가다·잡다,1,중,미래,사진 찍어 줄게.,I'll take a picture.,,Y
+TAKE,가져가다·잡다,1,중,현재,너 이 길로 가.,Take this road.,,Y
+TAKE,시간이 걸리다,2,중,현재,얼마나 걸려?,How long does it take?,,Y
+TAKE,시간이 걸리다,2,중,현재,10분밖에 안 걸려.,It only takes 10 minutes.,,Y
+TAKE,시간이 걸리다,2,중,과거,생각보다 오래 걸렸어.,It took longer than I thought.,,Y
+TAKE,시간이 걸리다,2,중,미래,시간이 좀 걸릴 거야.,It will take some time.,,Y
+TAKE,시간이 걸리다,3,중,과거,그거 하는 데 한 시간 걸렸어.,It took an hour to do that.,,Y
+TAKE,시간이 걸리다,3,중,현재,거기 가는 데 얼마나 걸려?,How long does it take to get there?,,Y
+TAKE,시간이 걸리다,1,중,현재,오래 안 걸려.,It won't take long.,,Y
+TAKE,시간이 걸리다,2,중,현재,준비하는 데 시간 좀 걸려.,It takes time to get ready.,,Y
+TAKE,시간이 걸리다,3,중,과거,그거 끝내는 데 하루 걸렸어.,It took a day to finish it.,,Y
+TAKE,시간이 걸리다,2,중,현재,배우는 데 시간이 걸려.,It takes time to learn.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,우리 잠깐 쉬자.,Let's take a break.,,Y
+TAKE,휴식·행동을 취하다,1,중,미래,나 낮잠 잘게.,I'll take a nap.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,심호흡해.,Take a deep breath.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,산책 좀 하자.,Let's take a walk.,,Y
+TAKE,휴식·행동을 취하다,2,중,현재,샤워 좀 할게.,I'm going to take a shower.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,잠깐 쉬어.,Take a rest.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,한 발 물러서서 생각해 봐.,Take a step back.,,Y
+TAKE,휴식·행동을 취하다,2,중,과거,나 그냥 하루 쉬었어.,I took a day off.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,천천히 해.,Take your time.,,Y
+TAKE,휴식·행동을 취하다,1,중,현재,우리 좀 쉬었다 가자.,Let's take a moment.,,Y
+TAKE,책임·처리를 떠맡다,2,중,미래,내가 처리할게.,I'll take care of it.,,Y
+TAKE,책임·처리를 떠맡다,1,중,미래,내가 책임질게.,I'll take responsibility.,,Y
+TAKE,책임·처리를 떠맡다,1,중,현재,이건 네가 맡아.,You take this one.,,Y
+TAKE,책임·처리를 떠맡다,1,중,과거,그가 그 일을 맡았어.,He took the job.,,Y
+TAKE,책임·처리를 떠맡다,2,중,미래,내가 애들 볼게.,I'll take care of the kids.,,Y
+TAKE,책임·처리를 떠맡다,3,중,미래,이 문제는 내가 처리할게.,I'll handle this — I'll take care of it.,,Y
+TAKE,책임·처리를 떠맡다,2,중,과거,그녀가 팀을 이끌게 됐어.,She took charge of the team.,,Y
+TAKE,책임·처리를 떠맡다,1,중,미래,내가 다 책임질게.,I'll take the blame.,,Y
+TAKE,책임·처리를 떠맡다,1,중,과거,그가 주도권을 잡았어.,He took the lead.,,Y
+TAKE,책임·처리를 떠맡다,2,중,미래,내가 알아서 처리할게.,I'll take care of everything.,,Y
+MAKE,만들다·요리하다,2,중,미래,내가 커피 만들어 줄게.,I'll make you a coffee.,,Y
+MAKE,만들다·요리하다,1,중,현재,우리 저녁 같이 만들자.,Let's make dinner together.,,Y
+MAKE,만들다·요리하다,2,중,현재,예약했어?,Did you make a reservation?,,Y
+MAKE,만들다·요리하다,1,중,과거,그녀가 케이크 만들었어.,She made a cake.,,Y
+MAKE,만들다·요리하다,1,중,현재,계획 세우자.,Let's make a plan.,,Y
+MAKE,만들다·요리하다,1,중,과거,나 실수했어.,I made a mistake.,,Y
+MAKE,만들다·요리하다,2,중,과거,그가 나한테 샌드위치 만들어 줬어.,He made me a sandwich.,,Y
+MAKE,만들다·요리하다,1,중,현재,목록 좀 만들자.,Let's make a list.,,Y
+MAKE,만들다·요리하다,2,중,과거,나 아침에 침대 정리했어.,I made my bed this morning.,,Y
+MAKE,만들다·요리하다,1,중,과거,우리 약속 잡았어.,We made an appointment.,,Y
+MAKE,~하게 만들다 (사역),1,중,현재,너는 날 웃게 해.,You make me laugh.,,Y
+MAKE,~하게 만들다 (사역),1,중,현재,그게 날 행복하게 해.,That makes me happy.,,Y
+MAKE,~하게 만들다 (사역),2,중,현재,이 노래 들으면 기분 좋아져.,This song makes me feel good.,,Y
+MAKE,~하게 만들다 (사역),1,중,과거,그게 날 슬프게 했어.,That made me sad.,,Y
+MAKE,~하게 만들다 (사역),1,중,과거,너 때문에 기다리게 됐잖아.,You made me wait.,,Y
+MAKE,~하게 만들다 (사역),2,중,과거,그 영화 보고 울었어.,That movie made me cry.,,Y
+MAKE,~하게 만들다 (사역),1,중,현재,이게 더 쉬워졌어.,This makes it easier.,,Y
+MAKE,~하게 만들다 (사역),1,중,과거,그가 날 화나게 했어.,He made me angry.,,Y
+MAKE,~하게 만들다 (사역),1,중,현재,그 생각하면 웃겨.,It makes me smile.,,Y
+MAKE,~하게 만들다 (사역),1,중,현재,keep awake가 자연스러운 연어,Coffee keeps me awake.,,Y
+MAKE,결정·성취하다,2,중,과거,나 결정했어.,I made up my mind.,,Y
+MAKE,결정·성취하다,1,중,현재,너 할 수 있어.,You can make it.,,Y
+MAKE,결정·성취하다,2,중,현재,제시간에 올 수 있어?,Can you make it on time?,,Y
+MAKE,결정·성취하다,1,중,과거,우리 해냈어!,We made it!,,Y
+MAKE,결정·성취하다,1,중,과거,그가 결정을 내렸어.,He made a decision.,,Y
+MAKE,결정·성취하다,1,중,현재,핑계 대지 마.,Don't make excuses.,,Y
+MAKE,결정·성취하다,2,중,현재,나 내일 모임 못 가.,I can't make it tomorrow.,,Y
+MAKE,결정·성취하다,1,중,과거,그녀가 큰 성과를 냈어.,She made great progress.,,Y
+MAKE,결정·성취하다,1,중,과거,우리 마감 맞췄어.,We made the deadline.,,Y
+MAKE,결정·성취하다,1,중,과거,드디어 성공했어.,I finally made it.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,현재,문 좀 열어 둬.,Keep the door open.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,현재,그게 날 편하게 해 줘.,That makes me comfortable.,,Y
+MAKE,~을 ~한 상태로 (5형식),2,중,현재,이 책 도움 많이 됐어.,I found this book helpful.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,현재,조용히 좀 해 줘.,Please keep it quiet.,,Y
+MAKE,~을 ~한 상태로 (5형식),2,중,과거,그 소식 듣고 기뻤어.,The news made me happy.,,Y
+MAKE,~을 ~한 상태로 (5형식),2,중,현재,그게 일을 쉽게 만들어.,That makes the work easy.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,현재,따뜻하게 입어.,Keep yourself warm.,,Y
+MAKE,~을 ~한 상태로 (5형식),2,중,현재,그 영화 지루했어.,I found the movie boring.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,과거,네가 우리를 자랑스럽게 했어.,You made us proud.,,Y
+MAKE,~을 ~한 상태로 (5형식),1,중,현재,계속 깨어 있어.,Keep yourself awake.,,Y

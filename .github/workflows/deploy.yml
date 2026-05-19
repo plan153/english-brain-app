@@ -1,0 +1,86 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # ── 1. Flutter 코드 검사 ──────────────────────────────
+  flutter-check:
+    name: Flutter Analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: stable
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: app
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos
+        working-directory: app
+
+  # ── 2. Supabase DB 마이그레이션 ───────────────────────
+  db-migrate:
+    name: Supabase Migration
+    runs-on: ubuntu-latest
+    needs: flutter-check
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Apply migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          PROJECT_REF="jslotdbzorvyzwvdilvj"
+          FAILED=0
+
+          for f in supabase/migrations/*.sql; do
+            echo "▶ Applying: $f"
+            HTTP_STATUS=$(curl -s -o /tmp/migrate_response.json -w "%{http_code}" \
+              -X POST \
+              "https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query" \
+              -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+              -H "Content-Type: application/json" \
+              --data-binary "{\"query\": $(jq -Rs . < "$f")}")
+
+            if [ "$HTTP_STATUS" != "200" ]; then
+              echo "❌ Failed ($HTTP_STATUS):"
+              cat /tmp/migrate_response.json
+              FAILED=1
+            else
+              echo "✅ OK: $f"
+            fi
+          done
+
+          exit $FAILED
+
+      # ── 3. 동작 검증 ──────────────────────────────────
+      - name: Verify generate_daily_mission RPC
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          PROJECT_URL="https://jslotdbzorvyzwvdilvj.supabase.co"
+          TEST_USER="00000000-0000-0000-0000-000000000001"
+
+          RESULT=$(curl -sf -X POST \
+            "${PROJECT_URL}/rest/v1/rpc/generate_daily_mission" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{\"p_user_id\": \"${TEST_USER}\"}")
+
+          echo "RPC result: $RESULT"
+
+          COUNT=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d) if isinstance(d,list) else 0)")
+
+          if [ "$COUNT" -lt 1 ]; then
+            echo "❌ RPC returned empty — migration may have failed"
+            exit 1
+          fi
+
+          echo "✅ RPC OK: ${COUNT}개 문장 반환"

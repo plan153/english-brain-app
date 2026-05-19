@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Brain Training App</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,'Segoe UI',sans-serif; background:#f5f5f5; color:#1a1a1a; line-height:1.6; }
+  .hero { background:#1a1a1a; color:#fff; padding:60px 24px; text-align:center; }
+  .hero .logo { font-size:40px; margin-bottom:12px; }
+  .hero h1 { font-size:32px; font-weight:800; margin-bottom:8px; }
+  .hero .sub { color:#aaa; font-size:15px; margin-bottom:6px; }
+  .hero .ver { display:inline-block; background:rgba(255,255,255,0.12); color:#fff; font-size:12px; font-weight:600; padding:4px 14px; border-radius:20px; margin-top:14px; }
+  .wrap { max-width:900px; margin:0 auto; padding:40px 24px; }
+  .map { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:40px; }
+  .map .cell { border-radius:12px; padding:18px 8px; text-align:center; }
+  .map .v { font-size:18px; font-weight:800; }
+  .map .a { font-size:22px; margin:6px 0; }
+  .map .d { font-size:11px; }
+  .c1{background:#E6F1FB;} .c1 .v{color:#0C447C;} .c1 .d{color:#185FA5;}
+  .c2{background:#E1F5EE;} .c2 .v{color:#085041;} .c2 .d{color:#0F6E56;}
+  .c3{background:#FAEEDA;} .c3 .v{color:#633806;} .c3 .d{color:#8A5511;}
+  .c4{background:#EEEDFE;} .c4 .v{color:#3C3489;} .c4 .d{color:#534AB7;}
+  h2 { font-size:20px; font-weight:800; margin:32px 0 16px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  .card { background:#fff; border:1px solid #eee; border-radius:14px; padding:18px; }
+  .card .ico { font-size:24px; margin-bottom:8px; }
+  .card .t { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .card .dd { font-size:12px; color:#888; }
+  .demo-btn { display:block; background:#1a1a1a; color:#fff; text-align:center; padding:16px; border-radius:14px; font-size:15px; font-weight:700; text-decoration:none; margin:24px 0; }
+  .demo-btn:hover { background:#333; }
+  .note { background:#FAEEDA; border-radius:12px; padding:16px 20px; font-size:13px; color:#633806; line-height:1.8; margin-top:24px; }
+  .note strong { color:#4A2A04; }
+  .files { font-size:13px; color:#666; }
+  .files li { padding:5px 0; border-bottom:1px solid #f0f0f0; }
+  .files code { background:#f0f0f0; padding:2px 6px; border-radius:4px; font-size:12px; }
+  footer { text-align:center; padding:30px; color:#aaa; font-size:12px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">🧠</div>
+  <h1>English Brain Training App</h1>
+  <div class="sub">한국인을 위한 이미지 기반 영어 회화 학습 앱</div>
+  <div class="sub">한국어를 들으면 번역 없이 바로 영어가 나오게</div>
+  <div class="ver" id="ver">v1.4.0</div>
+</div>
+
+<div class="wrap">
+
+  <div class="map">
+    <div class="cell c1"><div class="v">HAVE</div><div class="a">📦</div><div class="d">이미 내 안에 있음</div></div>
+    <div class="cell c2"><div class="v">GET</div><div class="a">→📥</div><div class="d">밖에서 안으로</div></div>
+    <div class="cell c3"><div class="v">TAKE</div><div class="a">✊→</div><div class="d">잡아서 가져나감</div></div>
+    <div class="cell c4"><div class="v">MAKE</div><div class="a">✦</div><div class="d">없던 걸 만듦</div></div>
+  </div>
+
+  <a class="demo-btn" href="design/app_ui_prototype.html">📱 앱 UI 프로토타입 체험하기 →</a>
+
+  <h2>프로젝트 구성</h2>
+  <div class="cards">
+    <div class="card"><div class="ico">🗄️</div><div class="t">DB 스키마</div><div class="dd">콘텐츠/학습 분리, 자동화 함수 포함 (db/)</div></div>
+    <div class="card"><div class="ico">📚</div><div class="t">콘텐츠 180선</div><div class="dd">실생활 예문 + 함정카드 (content/)</div></div>
+    <div class="card"><div class="ico">📱</div><div class="t">Flutter 앱 코드</div><div class="dd">학습 플로우 구현 (app/)</div></div>
+    <div class="card"><div class="ico">📄</div><div class="t">기획문서 v2</div><div class="dd">전문가 검토 반영 (docs/)</div></div>
+    <div class="card"><div class="ico">🎙️</div><div class="t">원어민 녹음대본</div><div class="dd">275문장 × 2속도 (docs/)</div></div>
+    <div class="card"><div class="ico">🎨</div><div class="t">UI 프로토타입</div><div class="dd">브라우저로 바로 체험 (design/)</div></div>
+  </div>
+
+  <div class="note">
+    💡 <strong>"GitHub에 올리면 바로 실행" 정리</strong><br>
+    · <strong>이 페이지(index.html)와 UI 프로토타입</strong>: GitHub Pages 설정 시 웹에서 바로 보임 ✓<br>
+    · <strong>Flutter 앱(app/)</strong>: 실제 모바일 앱이라 빌드 필요 (<code>flutter run</code>). GitHub에 올린다고 자동 실행되진 않음<br>
+    · <strong>DB·콘텐츠</strong>: Supabase에 <code>schema.sql</code> + <code>seed.sql</code> 실행 후 사용
+  </div>
+
+  <h2>GitHub Pages 설정법 (UI 데모 공개)</h2>
+  <ul class="files">
+    <li>1. GitHub 저장소 → <code>Settings</code> → <code>Pages</code></li>
+    <li>2. Source: <code>Deploy from a branch</code> → Branch: <code>main</code> / <code>(root)</code></li>
+    <li>3. 저장 후 1~2분 → <code>https://[사용자명].github.io/[저장소명]/</code> 접속</li>
+    <li>4. 이 index.html이 자동으로 표시됨 → UI 프로토타입 버튼으로 데모 확인</li>
+  </ul>
+
+</div>
+
+<footer>
+  English Brain Training App · 기획: 준석(David)<br>
+  버전 이력은 <code>CHANGELOG.md</code> 참조
+</footer>
+
+</body>
+</html>

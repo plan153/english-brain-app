@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Brain App</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f0f0f0; font-family: -apple-system, 'SF Pro Display', sans-serif; }
+  @keyframes wave { from { height: 8px; } to { height: 28px; } }
+  @keyframes pop { 0%{transform:scale(0.8);opacity:0} 100%{transform:scale(1);opacity:1} }
+  @keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes celebrate { 0%{transform:scale(0.7) rotate(-10deg);opacity:0} 80%{transform:scale(1.1) rotate(3deg)} 100%{transform:scale(1) rotate(0);opacity:1} }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const sentences = [
+  { id:1, ko:"내 조카는 거북이를 키워", en:"My nephew has a turtle.", verb:"HAVE", category:"소유/관계", hint:"have = 가지고 있다", image:"🐢", imageBg:"#E6F4FB" },
+  { id:2, ko:"시카고에 친구들이 있어", en:"I have friends in Chicago.", verb:"HAVE", category:"소유/관계", hint:"have + 명사 = ~이 있다", image:"🏙️", imageBg:"#E2F5EE" },
+  { id:3, ko:"내 생각은 달랐어", en:"I had a different idea.", verb:"HAVE", category:"소유/관계", hint:"had = 과거에 가지고 있었다", image:"💡", imageBg:"#FFF9E0" },
+  { id:4, ko:"우리 우애가 돈독해", en:"We have a strong bond.", verb:"HAVE", category:"소유/관계", hint:"have a bond = 유대를 가지다", image:"🤝", imageBg:"#FCE6EE" },
+  { id:5, ko:"현금 있어?", en:"Do you have any cash on you?", verb:"HAVE", category:"소유/관계", hint:"on you = 지금 몸에 지니고", image:"💵", imageBg:"#E9F5EA" },
+];
+
+function WaveBar({ delay, listening }) {
+  return (
+    <div style={{
+      width: 3, borderRadius: 4,
+      background: "#1a1a1a", opacity: listening ? 0.65 : 0.2,
+      height: listening ? 24 : 6,
+      transition: `height 0.3s ease ${delay}s`,
+      animation: listening ? `wave 0.75s ${delay}s ease-in-out infinite alternate` : "none",
+    }} />
+  );
+}
+
+function Phone({ children }) {
+  return (
+    <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px 0" }}>
+      <div style={{
+        width: 375, background:"white", borderRadius:44,
+        boxShadow:"0 32px 80px rgba(0,0,0,0.16)",
+        display:"flex", flexDirection:"column", overflow:"hidden", minHeight:760,
+      }}>
+        {/* Status bar */}
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"14px 28px 0", fontSize:13, fontWeight:600, color:"#1a1a1a" }}>
+          <span>9:41</span>
+          <div style={{ width:120, height:28, background:"#1a1a1a", borderRadius:20 }} />
+          <span>100%</span>
+        </div>
+        <div style={{ flex:1, display:"flex", flexDirection:"column" }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function BottomNav({ active, onNav }) {
+  const items = [
+    { icon:"🏠", label:"홈", key:"mission" },
+    { icon:"📚", label:"학습", key:"study" },
+    { icon:"🔁", label:"복습", key:"review" },
+    { icon:"📊", label:"기록", key:"stats" },
+  ];
+  return (
+    <div style={{ borderTop:"1px solid #f0f0f0", display:"flex", padding:"10px 0 20px", background:"white", marginTop:"auto" }}>
+      {items.map(item => (
+        <div key={item.key} onClick={() => onNav && onNav(item.key)}
+          style={{ flex:1, textAlign:"center", cursor:"pointer" }}>
+          <div style={{ fontSize:22 }}>{item.icon}</div>
+          <div style={{ fontSize:10, marginTop:3, color: active===item.key ? "#1a1a1a" : "#ccc", fontWeight: active===item.key ? 700 : 400 }}>
+            {item.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MissionScreen({ onStart, completed }) {
+  return (
+    <Phone>
+      <div style={{ padding:"20px 20px 0", display:"flex", alignItems:"center", gap:10 }}>
+        <div style={{ width:36, height:36, borderRadius:"50%", background:"#1a1a1a", display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🧠</div>
+        <div>
+          <div style={{ fontSize:16, fontWeight:700, color:"#1a1a1a" }}>English Brain</div>
+          <div style={{ fontSize:11, color:"#aaa" }}>영어뇌 훈련 앱</div>
+        </div>
+      </div>
+
+      <div style={{ padding:"22px 20px 0" }}>
+        <div style={{ fontSize:11, fontWeight:700, color:"#aaa", letterSpacing:"0.08em", marginBottom:8 }}>DAY 1 · HAVE 소유/관계</div>
+
+        <div style={{ background:"#1a1a1a", borderRadius:20, padding:"22px 20px", marginBottom:14, animation:"slideUp 0.4s ease" }}>
+          <div style={{ fontSize:12, color:"#666", marginBottom:4 }}>오늘의 미션</div>
+          <div style={{ fontSize:26, fontWeight:800, color:"white", marginBottom:4 }}>5문장 완성하기</div>
+          <div style={{ fontSize:12, color:"#555", marginBottom:18 }}>듣고 → 연상하고 → 바로 말하기</div>
+          <div style={{ display:"flex", gap:8, marginBottom:20 }}>
+            {sentences.map((_,i) => (
+              <div key={i} style={{ flex:1, height:4, borderRadius:2, background: completed.includes(i) ? "#4ade80" : "rgba(255,255,255,0.15)", transition:"background 0.3s" }} />
+            ))}
+          </div>
+          <button onClick={onStart} style={{ width:"100%", padding:"13px 0", borderRadius:13, border:"none", background:"white", color:"#1a1a1a", fontSize:15, fontWeight:700, cursor:"pointer" }}>
+            시작하기 →
+          </button>
+        </div>
+
+        <div style={{ border:"1.5px solid #f0f0f0", borderRadius:16, padding:"14px 16px", marginBottom:12 }}>
+          <div style={{ fontSize:13, fontWeight:700, color:"#1a1a1a", marginBottom:10 }}>✦ 추가 확장 학습 (미션 후 선택)</div>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
+            {[{icon:"⏳",label:"시제 변형"},{icon:"🔄",label:"긍정/부정"},{icon:"❓",label:"질문/맞장구"},{icon:"📍",label:"장소·시간"}].map(item => (
+              <div key={item.label} style={{ background:"#fafafa", borderRadius:10, padding:"10px 12px", display:"flex", alignItems:"center", gap:8, fontSize:12, color:"#555" }}>
+                <span style={{ fontSize:16 }}>{item.icon}</span>{item.label}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display:"flex", gap:8 }}>
+          {[{label:"연속",value:"3일"},{label:"완료",value:"12문장"},{label:"정확도",value:"86%"}].map(s => (
+            <div key={s.label} style={{ flex:1, background:"#fafafa", borderRadius:12, padding:"12px 8px", textAlign:"center" }}>
+              <div style={{ fontSize:17, fontWeight:700, color:"#1a1a1a" }}>{s.value}</div>
+              <div style={{ fontSize:10, color:"#bbb", marginTop:2 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <BottomNav active="mission" />
+    </Phone>
+  );
+}
+
+function StudyScreen({ current, total, sent, showAnswer, listening, showHint, onListen, onShowHint, onShowAnswer, onNext, onRetry, onBack }) {
+  return (
+    <Phone>
+      <div style={{ padding:"18px 20px 10px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+        <button onClick={onBack} style={{ background:"transparent", border:"none", cursor:"pointer", fontSize:20, color:"#1a1a1a" }}>←</button>
+        <div style={{ fontSize:13, color:"#bbb", fontWeight:500 }}>{current+1} / {total}</div>
+        <div style={{ width:32 }} />
+      </div>
+
+      {/* Progress */}
+      <div style={{ padding:"0 20px 16px" }}>
+        <div style={{ height:3, background:"#f0f0f0", borderRadius:2 }}>
+          <div style={{ height:"100%", borderRadius:2, background:"#1a1a1a", width:`${(current/total)*100}%`, transition:"width 0.4s" }} />
+        </div>
+      </div>
+
+      {/* Verb tag */}
+      <div style={{ padding:"0 20px 14px" }}>
+        <span style={{ fontSize:11, fontWeight:700, letterSpacing:"0.1em", background:"#1a1a1a", color:"white", padding:"4px 12px", borderRadius:20 }}>
+          {sent.verb} · {sent.category}
+        </span>
+      </div>
+
+      {/* Image card */}
+      <div style={{ padding:"0 20px 18px" }}>
+        <div style={{ background:sent.imageBg, borderRadius:24, padding:"28px 20px", textAlign:"center", animation:"pop 0.35s ease" }}>
+          <div style={{ fontSize:76, lineHeight:1, marginBottom:14 }}>{sent.image}</div>
+          <div style={{ fontSize:19, fontWeight:700, color:"#1a1a1a", lineHeight:1.5 }}>{sent.ko}</div>
+          {showHint && (
+            <div style={{ marginTop:12, fontSize:13, color:"#666", background:"rgba(255,255,255,0.75)", borderRadius:10, padding:"6px 14px", display:"inline-block", animation:"fadeIn 0.2s ease" }}>
+              💡 {sent.hint}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {showAnswer ? (
+        <div style={{ padding:"0 20px", animation:"fadeIn 0.3s ease" }}>
+          <div style={{ background:"#f8f8f8", borderRadius:18, padding:"16px 18px", marginBottom:12 }}>
+            <div style={{ fontSize:12, color:"#bbb", marginBottom:5 }}>모범 답안</div>
+            <div style={{ fontSize:17, fontWeight:700, color:"#1a1a1a", marginBottom:12 }}>{sent.en}</div>
+            <div style={{ display:"flex", alignItems:"center", gap:8, background:"white", border:"1px solid #eee", borderRadius:10, padding:"8px 14px", display:"inline-flex", fontSize:13, color:"#555" }}>
+              <span>▶</span> 원어민 발음 듣기
+            </div>
+          </div>
+          <div style={{ display:"flex", gap:8 }}>
+            <button onClick={onRetry} style={{ flex:1, padding:"13px 0", borderRadius:14, border:"1.5px solid #e8e8e8", background:"white", fontSize:14, fontWeight:600, color:"#555", cursor:"pointer" }}>
+              다시 말하기
+            </button>
+            <button onClick={onNext} style={{ flex:2, padding:"13px 0", borderRadius:14, border:"none", background:"#1a1a1a", fontSize:14, fontWeight:700, color:"white", cursor:"pointer" }}>
+              다음 문장 →
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div style={{ padding:"0 20px" }}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginBottom:20, minHeight:44 }}>
+            {listening ? (
+              <>
+                {[0,0.1,0.2,0.15,0.05,0.12,0.08].map((d,i) => <WaveBar key={i} delay={d} listening={true} />)}
+                <span style={{ fontSize:13, color:"#888", marginLeft:6 }}>듣는 중...</span>
+              </>
+            ) : (
+              <span style={{ fontSize:13, color:"#ccc" }}>영어로 말해보세요</span>
+            )}
+          </div>
+
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:28, marginBottom:12 }}>
+            <div onClick={onShowHint} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4, cursor:"pointer" }}>
+              <div style={{ width:42, height:42, borderRadius:"50%", background:"#f5f5f5", display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>💡</div>
+              <span style={{ fontSize:11, color:"#bbb" }}>힌트</span>
+            </div>
+
+            <button onClick={onListen} style={{
+              width:66, height:66, borderRadius:"50%", border:"none",
+              background: listening ? "#1a1a1a" : "#f2f2f2",
+              cursor:"pointer", fontSize:26, transition:"all 0.2s",
+              boxShadow: listening ? "0 0 0 10px rgba(0,0,0,0.07)" : "none",
+            }}>
+              🎙️
+            </button>
+
+            <div onClick={onShowAnswer} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4, cursor:"pointer" }}>
+              <div style={{ width:42, height:42, borderRadius:"50%", background:"#f5f5f5", display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>👁️</div>
+              <span style={{ fontSize:11, color:"#bbb" }}>답 보기</span>
+            </div>
+          </div>
+          <div style={{ textAlign:"center", fontSize:12, color:"#ddd" }}>마이크를 눌러 영어로 말해보세요</div>
+        </div>
+      )}
+      <BottomNav active="study" />
+    </Phone>
+  );
+}
+
+function DoneScreen({ onHome }) {
+  return (
+    <Phone>
+      <div style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0 24px" }}>
+        <div style={{ fontSize:80, marginBottom:16, animation:"celebrate 0.5s ease" }}>🎉</div>
+        <div style={{ fontSize:24, fontWeight:800, color:"#1a1a1a", marginBottom:8, textAlign:"center" }}>오늘 미션 완료!</div>
+        <div style={{ fontSize:14, color:"#aaa", marginBottom:28, textAlign:"center" }}>5문장 모두 완성했어요 · Day 1 HAVE</div>
+
+        <div style={{ background:"#1a1a1a", borderRadius:20, padding:"20px", width:"100%", marginBottom:16, animation:"slideUp 0.4s 0.2s both" }}>
+          <div style={{ display:"flex", justifyContent:"space-around" }}>
+            {[{label:"완료 문장",value:"5"},{label:"정확도",value:"80%"},{label:"연속 학습",value:"3일"}].map(s => (
+              <div key={s.label} style={{ textAlign:"center" }}>
+                <div style={{ fontSize:24, fontWeight:800, color:"white" }}>{s.value}</div>
+                <div style={{ fontSize:11, color:"#555", marginTop:4 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ width:"100%", marginBottom:16, animation:"slideUp 0.4s 0.3s both" }}>
+          <div style={{ fontSize:13, fontWeight:700, color:"#1a1a1a", marginBottom:10 }}>더 공부할까요?</div>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
+            {[{icon:"⏳",label:"시제 변형",sub:"현재→과거→미래"},{icon:"🔄",label:"긍정/부정",sub:"don't / never"},{icon:"❓",label:"질문/맞장구",sub:"Really? / I know!"},{icon:"📍",label:"장소·시간",sub:"블록 붙이기"}].map(item => (
+              <button key={item.label} style={{ background:"#fafafa", border:"1.5px solid #f0f0f0", borderRadius:14, padding:"14px 12px", textAlign:"left", cursor:"pointer" }}>
+                <div style={{ fontSize:22, marginBottom:6 }}>{item.icon}</div>
+                <div style={{ fontSize:13, fontWeight:700, color:"#1a1a1a" }}>{item.label}</div>
+                <div style={{ fontSize:11, color:"#bbb", marginTop:2 }}>{item.sub}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button onClick={onHome} style={{ width:"100%", padding:"15px 0", borderRadius:16, border:"none", background:"#1a1a1a", fontSize:15, fontWeight:700, color:"white", cursor:"pointer", animation:"slideUp 0.4s 0.4s both" }}>
+          홈으로 돌아가기
+        </button>
+      </div>
+      <BottomNav active="mission" />
+    </Phone>
+  );
+}
+
+function App() {
+  const [screen, setScreen] = useState("mission");
+  const [current, setCurrent] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [completed, setCompleted] = useState([]);
+  const timerRef = useRef(null);
+
+  const handleListen = () => {
+    setListening(true);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setListening(false);
+      setShowAnswer(true);
+    }, 2200);
+  };
+
+  const handleNext = () => {
+    const newCompleted = [...completed, current];
+    setCompleted(newCompleted);
+    setShowAnswer(false);
+    setShowHint(false);
+    setListening(false);
+    if (current + 1 >= sentences.length) {
+      setScreen("done");
+    } else {
+      setCurrent(current + 1);
+    }
+  };
+
+  const handleRetry = () => {
+    setShowAnswer(false);
+    setShowHint(false);
+    setListening(false);
+  };
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  if (screen === "mission") return <MissionScreen onStart={() => setScreen("study")} completed={completed} />;
+  if (screen === "done") return <DoneScreen onHome={() => { setScreen("mission"); setCurrent(0); setCompleted([]); }} />;
+
+  return (
+    <StudyScreen
+      current={current}
+      total={sentences.length}
+      sent={sentences[current]}
+      showAnswer={showAnswer}
+      listening={listening}
+      showHint={showHint}
+      onListen={handleListen}
+      onShowHint={() => setShowHint(!showHint)}
+      onShowAnswer={() => setShowAnswer(true)}
+      onNext={handleNext}
+      onRetry={handleRetry}
+      onBack={() => setScreen("mission")}
+    />
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>

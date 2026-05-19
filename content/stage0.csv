@@ -1,0 +1,17 @@
+﻿뼈대,개념,틀린문장,맞는문장,이유
+뼈대 1 — 주어 + 동사는 반드시 있다,"한국어는 '배고파'로 끝나지만, 영어는 '누가(주어) + 어쩐다(동사)'가 항상 있어야 그림이 완성됨",Hungry.,I am hungry.,누가 배고픈지(I) + 상태(am) 둘 다 필요
+뼈대 1 — 주어 + 동사는 반드시 있다,"한국어는 '배고파'로 끝나지만, 영어는 '누가(주어) + 어쩐다(동사)'가 항상 있어야 그림이 완성됨",Go now.,I will go now.,명령이 아니면 주어(I) 필수
+뼈대 1 — 주어 + 동사는 반드시 있다,"한국어는 '배고파'로 끝나지만, 영어는 '누가(주어) + 어쩐다(동사)'가 항상 있어야 그림이 완성됨",So tired.,I'm so tired.,감정도 주어+be동사로 시작
+뼈대 1 — 주어 + 동사는 반드시 있다,"한국어는 '배고파'로 끝나지만, 영어는 '누가(주어) + 어쩐다(동사)'가 항상 있어야 그림이 완성됨",Rain a lot.,It rains a lot.,비가 와도 주어 It 필요 (영어는 빈자리 안 둠)
+뼈대 2 — be동사와 일반동사는 못 섞는다,"한 문장에 진짜 동사는 하나. be(am/is/are)는 '상태', 일반동사는 '행동'. 둘을 같이 쓰면 충돌",I am have a car.,I have a car.,have가 동사니까 am 불필요
+뼈대 2 — be동사와 일반동사는 못 섞는다,"한 문장에 진짜 동사는 하나. be(am/is/are)는 '상태', 일반동사는 '행동'. 둘을 같이 쓰면 충돌",I am go to work.,I go to work.,go가 동사. am 빼기
+뼈대 2 — be동사와 일반동사는 못 섞는다,"한 문장에 진짜 동사는 하나. be(am/is/are)는 '상태', 일반동사는 '행동'. 둘을 같이 쓰면 충돌",She is have lunch.,She is having lunch.,굳이 is 쓰려면 동사를 -ing로 (진행형)
+뼈대 2 — be동사와 일반동사는 못 섞는다,"한 문장에 진짜 동사는 하나. be(am/is/are)는 '상태', 일반동사는 '행동'. 둘을 같이 쓰면 충돌",I hungry.,I am hungry.,hungry는 형용사라 동사 am 필요
+뼈대 3 — 셀 수 있는 명사엔 a / the가 붙는다,"한국어엔 없는 개념. 'a'는 '하나의(아무거나)', 'the'는 '바로 그것'. 명사 앞 빈자리를 못 둠",I have car.,I have a car.,차 '한 대' — a가 '하나'라는 그림
+뼈대 3 — 셀 수 있는 명사엔 a / the가 붙는다,"한국어엔 없는 개념. 'a'는 '하나의(아무거나)', 'the'는 '바로 그것'. 명사 앞 빈자리를 못 둠",I'm teacher.,I'm a teacher.,직업 앞엔 a (여럿 중 하나)
+뼈대 3 — 셀 수 있는 명사엔 a / the가 붙는다,"한국어엔 없는 개념. 'a'는 '하나의(아무거나)', 'the'는 '바로 그것'. 명사 앞 빈자리를 못 둠",Close door.,Close the door.,서로 아는 '바로 그 문' — the
+뼈대 3 — 셀 수 있는 명사엔 a / the가 붙는다,"한국어엔 없는 개념. 'a'는 '하나의(아무거나)', 'the'는 '바로 그것'. 명사 앞 빈자리를 못 둠",I like dog.,I like dogs.,개 전체를 좋아하면 복수 (a도 the도 없이)
+뼈대 4 — 한국어 '있다'는 영어로 3가지,"'있다'를 무조건 have로 쓰면 안 됨. 소유면 have, 위치면 there is, 사람 위치면 be",There is a friend. (친구 있어),I have a friend.,내가 가진 관계 → have
+뼈대 4 — 한국어 '있다'는 영어로 3가지,"'있다'를 무조건 have로 쓰면 안 됨. 소유면 have, 위치면 there is, 사람 위치면 be",I have a book on the desk.,There is a book on the desk.,어떤 장소에 존재 → there is
+뼈대 4 — 한국어 '있다'는 영어로 3가지,"'있다'를 무조건 have로 쓰면 안 됨. 소유면 have, 위치면 there is, 사람 위치면 be",I have at home.,I'm at home.,내가 어떤 장소에 → be동사
+뼈대 4 — 한국어 '있다'는 영어로 3가지,"'있다'를 무조건 have로 쓰면 안 됨. 소유면 have, 위치면 there is, 사람 위치면 be",Have a problem here.,There's a problem here.,문제가 존재함 → there is

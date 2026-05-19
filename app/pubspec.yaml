@@ -1,0 +1,25 @@
+name: english_brain_app
+description: 한국인을 위한 영어뇌 훈련 앱
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.5.0      # 백엔드/DB 연동
+  speech_to_text: ^6.6.0        # 말하기 인식 (STT)
+  audioplayers: ^6.0.0          # 원어민 음성 재생 (TTS 파일)
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/audio/      # 원어민 녹음 파일 (선택: 로컬 캐시)
