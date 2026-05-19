@@ -19,7 +19,7 @@ jobs:
         run: flutter pub get
         working-directory: app
       - name: Analyze
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze
         working-directory: app
 
   # ── 2. Supabase DB 마이그레이션 ───────────────────────
