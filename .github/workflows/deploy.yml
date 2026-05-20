@@ -32,35 +32,16 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Apply migrations
+      - name: Setup Supabase CLI
+        run: |
+          npm install -g supabase
+
+      - name: Apply migrations using Supabase CLI
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
-          PROJECT_REF="jslotdbzorvyzwvdilvj"
-          FAILED=0
-
-          echo "Token length: ${#SUPABASE_ACCESS_TOKEN}"
-          echo "Project Ref: $PROJECT_REF"
-
-          for f in supabase/migrations/*.sql; do
-            echo "▶ Applying: $f"
-            HTTP_STATUS=$(curl -s -o /tmp/migrate_response.json -w "%{http_code}" \
-              -X POST \
-              "https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query" \
-              -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
-              -H "Content-Type: application/json" \
-              --data-binary "{\"query\": $(jq -Rs . < "$f")}")
-
-            if [ "$HTTP_STATUS" != "200" ]; then
-              echo "❌ Failed ($HTTP_STATUS):"
-              cat /tmp/migrate_response.json
-              FAILED=1
-            else
-              echo "✅ OK: $f"
-            fi
-          done
-
-          exit $FAILED
+          supabase link --project-ref jslotdbzorvyzwvdilvj
+          supabase db push
 
       # ── 3. 동작 검증 ──────────────────────────────────
       - name: Verify generate_daily_mission RPC

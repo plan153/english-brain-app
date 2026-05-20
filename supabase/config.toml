@@ -1,0 +1,13 @@
+# Supabase local development configuration
+[project]
+project_id = "jslotdbzorvyzwvdilvj"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
