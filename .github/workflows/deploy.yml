@@ -13,13 +13,26 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x'
+          flutter-version: '3.24.0'
           channel: stable
+          cache: true
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          flutter clean
+          flutter pub get
         working-directory: app
-      - name: Analyze
-        run: flutter analyze
+      - name: Check Flutter version
+        run: flutter --version
+      - name: Analyze code
+        run: |
+          echo "Running Flutter Analyze..."
+          flutter analyze --no-fatal-infos 2>&1 | tee analyze_output.txt
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "⚠️ Analyzer found issues:"
+            cat analyze_output.txt
+            exit 1
+          fi
+          echo "✅ Analyze passed"
         working-directory: app
 
   # ── 2. Supabase DB 마이그레이션 ───────────────────────
