@@ -39,6 +39,9 @@ jobs:
           PROJECT_REF="jslotdbzorvyzwvdilvj"
           FAILED=0
 
+          echo "Token length: ${#SUPABASE_ACCESS_TOKEN}"
+          echo "Project Ref: $PROJECT_REF"
+
           for f in supabase/migrations/*.sql; do
             echo "▶ Applying: $f"
             HTTP_STATUS=$(curl -s -o /tmp/migrate_response.json -w "%{http_code}" \
