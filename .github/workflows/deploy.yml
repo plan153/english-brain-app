@@ -32,16 +32,47 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Setup Supabase CLI
-        run: |
-          npm install -g supabase
-
-      - name: Apply migrations using Supabase CLI
+      - name: Apply migrations using Python
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
         run: |
-          supabase link --project-ref jslotdbzorvyzwvdilvj
-          supabase db push
+          python3 << 'EOF'
+          import os
+          import psycopg2
+          from pathlib import Path
+
+          # Get database URL from secrets
+          db_url = os.environ.get('DATABASE_URL')
+          if not db_url:
+              print("⚠️  DATABASE_URL not set, skipping migrations")
+              print("Add SUPABASE_DATABASE_URL to GitHub Secrets to enable migrations")
+              exit(0)
+
+          print(f"Connecting to database...")
+          conn = psycopg2.connect(db_url, sslmode='require')
+          cursor = conn.cursor()
+
+          # Apply all migrations in order
+          migrations_dir = Path('supabase/migrations')
+          for sql_file in sorted(migrations_dir.glob('*.sql')):
+              with open(sql_file, 'r') as f:
+                  sql = f.read()
+
+              print(f"▶ Applying: {sql_file.name}")
+              try:
+                  cursor.execute(sql)
+                  conn.commit()
+                  print(f"✅ OK: {sql_file.name}")
+              except Exception as e:
+                  print(f"❌ Failed: {sql_file.name}")
+                  print(f"Error: {e}")
+                  conn.rollback()
+                  raise
+
+          cursor.close()
+          conn.close()
+          print("✅ All migrations applied")
+          EOF
 
       # ── 3. 동작 검증 ──────────────────────────────────
       - name: Verify generate_daily_mission RPC
