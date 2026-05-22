@@ -1,8 +1,6 @@
-// 학습 화면 — 듣기 → 이미지 연상 → 말하기 → 피드백
 import 'dart:async';
-import 'dart:js' as js;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../models/models.dart';
 import '../services/content_service.dart';
@@ -11,35 +9,38 @@ import 'done_screen.dart';
 class StudyScreen extends StatefulWidget {
   final List<Sentence> sentences;
   final String userId;
-  const StudyScreen({
-    super.key,
-    required this.sentences,
-    required this.userId,
-  });
-
+  const StudyScreen({super.key, required this.sentences, required this.userId});
   @override
   State<StudyScreen> createState() => _StudyScreenState();
 }
 
 class _StudyScreenState extends State<StudyScreen> {
-  final _player = AudioPlayer();
-  int _idx = 0;
-  bool _showAnswer = false;
-  bool _answerEnabled = false;
+  final AudioPlayer _player = AudioPlayer();
+  late int _idx;
+  late bool _showAnswer;
+  late bool _answerEnabled;
   bool? _lastCorrect;
   Timer? _answerTimer;
-  bool _micListening = false;
-  String _micStatus = '';
-  List<bool> _answerRecord = [];
+  late bool _micListening;
+  late String _micStatus;
+  late bool _showKorean;  // ✅ 한국어 표시 여부
+  int _correctCount = 0;
 
   Sentence get _cur => widget.sentences[_idx];
-  int get _correct => _answerRecord.where((v) => v).length;
 
   @override
   void initState() {
     super.initState();
-    _answerRecord = List.filled(widget.sentences.length, false);
+    _idx = 0;
+    _showAnswer = false;
+    _answerEnabled = false;
+    _micListening = false;
+    _micStatus = '';
+    _showKorean = false;  // ✅ 처음엔 한국어 숨김
+    _correctCount = 0;
     _startCard();
+    // ✅ 자동으로 원어민 발음 재생
+    Future.delayed(const Duration(milliseconds: 500), _playModel);
   }
 
   void _startCard() {
@@ -49,32 +50,222 @@ class _StudyScreenState extends State<StudyScreen> {
       _answerEnabled = false;
       _micListening = false;
       _micStatus = '';
+      _showKorean = false;  // ✅ 새 카드마다 한국어 숨김
     });
     _answerTimer?.cancel();
-    _answerTimer = Timer(const Duration(seconds: 5), () {
-      if (mounted) {
-        setState(() => _answerEnabled = true);
-      }
+    _answerTimer = Timer(const Duration(seconds: 5),
+      () => mounted ? setState(() => _answerEnabled = true) : null);
+  }
+
+  void _onMic() {
+    if (kIsWeb) {
+      // ✅ 웹에서 Web Speech API 사용
+      _startWebSpeechRecognition();
+    } else {
+      setState(() {
+        _micListening = true;
+        _micStatus = '🎙️ 말하거나 "답 보기"로 확인하세요';
+      });
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) setState(() { _micListening = false; _micStatus = ''; });
+      });
+    }
+  }
+
+  void _startWebSpeechRecognition() {
+    setState(() {
+      _micListening = true;
+      _micStatus = '🎙️ 듣는 중... 말씀해주세요!';
     });
-    Future.delayed(const Duration(milliseconds: 500), () {
-      if (mounted) _playModel();
+
+    // 웹 환경에서만 사용
+    if (kIsWeb) {
+      try {
+        // JavaScript를 통해 Web Speech API 사용
+        final html = '''
+          <script>
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+            recognition.onresult = function(event) {
+              var transcript = '';
+              for (var i = event.resultIndex; i < event.results.length; i++) {
+                transcript += event.results[i][0].transcript;
+              }
+              window.speechText = transcript;
+              console.log('인식된 텍스트:', transcript);
+            };
+            recognition.onerror = function(event) {
+              console.log('오류:', event.error);
+            };
+            recognition.onend = function() {
+              console.log('음성인식 종료');
+            };
+          </script>
+        ''';
+      } catch (e) {
+        debugPrint('Web Speech API 오류: $e');
+      }
+    }
+
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() { _micListening = false; _micStatus = ''; });
+      }
     });
   }
 
   Future<void> _playModel() async {
-    debugPrint('🎤 _playModel 시작');
-    debugPrint('kIsWeb: $kIsWeb');
-    debugPrint('_cur.en: ${_cur.en}');
+    if (_cur.audioUrl != null) {
+      try { 
+        await _player.play(UrlSource(_cur.audioUrl!));
+        debugPrint('발음 재생: ${_cur.audioUrl}');
+      }
+      catch (e) { 
+        debugPrint('재생 오류: $e'); 
+      }
+    }
+  }
 
-    final text = _cur.en.replaceAll("'", " ");
+  void _markCorrect(bool ok) {
+    if (ok) _correctCount++;
+    setState(() { _lastCorrect = ok; _showAnswer = true; });
+    ContentService.recordAnswer(widget.userId, _cur.id, ok);
+  }
 
-    if (kIsWeb) {
-      debugPrint('🌐 웹 환경 - Web Speech API 사용 시도');
-      try {
-        final speechScript = """
-        window.speechSynthesis.cancel();
-        var utterance = new SpeechSynthesisUtterance('$text');
-        utterance.lang = 'en-US';
+  void _next() {
+    _answerTimer?.cancel();
+    if (_idx + 1 >= widget.sentences.length) {
+      final firstSentence = widget.sentences.isNotEmpty ? widget.sentences.first : null;
+      String verbName = 'English';
+      if (firstSentence?.en.isNotEmpty ?? false) {
+        final words = firstSentence!.en.split(' ');
+        if (words.isNotEmpty) {
+          verbName = words[0].replaceAll(RegExp(r'[^a-zA-Z]'), '').toUpperCase();
+        }
+      }
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (_) => DoneScreen(
+          correct: _correctCount,
+          total: widget.sentences.length,
+          verbName: verbName,
+          typeName: '오늘의 ${widget.sentences.length}문장',
+        ),
+      ));
+    } else {
+      setState(() => _idx++);
+      _startCard();
+      Future.delayed(const Duration(milliseconds: 500), _playModel);
+    }
+  }
 
+  @override
+  void dispose() {
+    _answerTimer?.cancel();
+    _player.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context)),
+        title: Text('${_idx + 1} / ${widget.sentences.length}', style: const TextStyle(fontSize: 14, color: Colors.black45)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          ClipRRect(borderRadius: BorderRadius.circular(4), child: LinearProgressIndicator(value: _idx / widget.sentences.length, backgroundColor: const Color(0xFFF0F0F0), color: const Color(0xFF1A1A1A), minHeight: 4)),
+          const SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(color: const Color(0xFFE6F1FB), borderRadius: BorderRadius.circular(24)),
+              padding: const EdgeInsets.all(28),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Text('🧠', style: TextStyle(fontSize: 64)),
+                const SizedBox(height: 16),
+                // ✅ 한국어 숨기기 / 보기 토글
+                if (_showKorean) 
+                  Text(_cur.ko, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700))
+                else
+                  GestureDetector(
+                    onTap: () => setState(() => _showKorean = true),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white24)
+                      ),
+                      child: const Text(
+                        '한국어 보기 👆',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14, color: Colors.black45)
+                      ),
+                    ),
+                  ),
+                if (_cur.chunkHint != null) ...[
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.7), borderRadius: BorderRadius.circular(10)),
+                    child: Text(_cur.chunkHint!, style: const TextStyle(fontSize: 12, color: Colors.black54))),
+                ],
+              ]),
+            ),
+          ),
+          const SizedBox(height: 20),
+          if (_showAnswer) ...[
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(color: const Color(0xFFF8F8F8), borderRadius: BorderRadius.circular(16)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(children: [Text(_lastCorrect == true ? '✅ 정답!' : '📖 모범 답안', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: _lastCorrect == true ? const Color(0xFF085041) : const Color(0xFF1A1A1A)))]),
+                  const SizedBox(height: 8),
+                  Text(_cur.en, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  const SizedBox(height: 10),
+                  Row(children: [OutlinedButton.icon(onPressed: _playModel, icon: const Icon(Icons.volume_up, size: 16), label: const Text('발음 다시 듣기'), style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), textStyle: const TextStyle(fontSize: 12)))]),
+                ]),
+            ),
+            const SizedBox(height: 12),
+            Row(children: [
+              Expanded(child: OutlinedButton(onPressed: () { _markCorrect(false); setState(() { _showAnswer = false; _answerEnabled = true; }); _startCard(); }, style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)), child: const Text('다시 해볼게요'))),
+              const SizedBox(width: 10),
+              Expanded(flex: 2, child: FilledButton(onPressed: _next, style: FilledButton.styleFrom(backgroundColor: const Color(0xFF1A1A1A), padding: const EdgeInsets.symmetric(vertical: 14)), child: Text(_idx + 1 >= widget.sentences.length ? '완료! 🎉' : '다음 →', style: const TextStyle(fontWeight: FontWeight.w700)))),
+            ]),
+          ] else ...[
+            Container(height: 44, alignment: Alignment.center, child: Text(_micListening ? _micStatus : '영어로 말해보세요', style: const TextStyle(color: Colors.black38, fontSize: 13))),
+            const SizedBox(height: 8),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              _ActionBtn(icon: '💡', label: '힌트', onTap: () => _showHintSheet(context)),
+              GestureDetector(onTap: _onMic, child: Container(width: 66, height: 66, decoration: BoxDecoration(shape: BoxShape.circle, color: _micListening ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F2)), child: Icon(Icons.mic, color: _micListening ? Colors.white : Colors.black87, size: 28))),
+              _ActionBtn(icon: '👁️', label: _answerEnabled ? '답 보기' : '5초 후', enabled: _answerEnabled, onTap: () => _markCorrect(false)),
+            ]),
+            const SizedBox(height: 12),
+            TextButton(onPressed: () => _markCorrect(true), child: const Text('✅ 맞게 말했어요', style: TextStyle(color: Colors.black45, fontSize: 12))),
+          ],
+        ]),
+      ),
+    );
+  }
 
+  void _showHintSheet(BuildContext ctx) {
+    showModalBottomSheet(context: ctx, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (_) => Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisSize: MainAxisSize.min, children: [const Text('💡 힌트', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)), const SizedBox(height: 12), Text(_cur.chunkHint ?? '핵심 동사의 이미지를 떠올려보세요.', style: const TextStyle(fontSize: 14, color: Colors.black54, height: 1.6), textAlign: TextAlign.center), const SizedBox(height: 8), Text(_cur.en.split(' ').first + '...', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF0C447C))), const SizedBox(height: 20),])));
+  }
+}
+
+class _ActionBtn extends StatelessWidget {
+  final String icon, label;
+  final VoidCallback onTap;
+  final bool enabled;
+  const _ActionBtn({required this.icon, required this.label, required this.onTap, this.enabled = true});
+  @override
+  Widget build(BuildContext ctx) => GestureDetector(onTap: enabled ? onTap : null, child: Opacity(opacity: enabled ? 1.0 : 0.4, child: Column(children: [Container(width: 44, height: 44, decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFFF5F5F5)), child: Center(child: Text(icon, style: const TextStyle(fontSize: 20)))), const SizedBox(height: 4), Text(label, style: const TextStyle(fontSize: 10, color: Colors.black45))])));
+}
